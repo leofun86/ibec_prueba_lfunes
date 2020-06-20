@@ -1,6 +1,55 @@
 <h2>Listado de productos</h2>
-    <li *ngFor="let producto of productos">
-        <p>{{producto.id_producto}}</p>
-        <p>{{producto.ci_cliente}}</p>
-        <p>{{producto.cantidad}}</p>
-    </li>
+<table class="table table-dark">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID Producto</th>
+        <th scope="col">CI</th>
+        <th scope="col">Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let producto of productos">
+            <th scope="row">1</th>
+            <td>{{producto.id_producto}}</td>
+            <td>{{producto.ci_cliente}}</td>
+            <td>{{producto.cantidad}}</td>
+            <td>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#editarProducto" (click)="editarProducto(producto)">Editar</button>
+            </td>
+            <td>
+                <button class="btn btn-danger">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="modal" id="editarProducto" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="productoEditado()">
+             <label for="ci_cliente">Ci</label>
+             <input
+                 type="text" placeholder="Cédula"
+                 name="ci_cliente" class="form-control"
+                 [(ngModel)]="editProd.ci_cliente"
+             >
+             <label for="cantidad">Cantidad</label>
+             <br>
+             <input
+                 type="text" placeholder="Cantidad"
+                 name="cantidad" class="form-control"
+                 [(ngModel)]="editProd.cantidad"
+             >
+             <button class="btn btn-success mt-3" type="submit" data-dismiss="modal">Actualizar</button>
+         </form>
+        </div>
+      </div>
+    </div>
+  </div>

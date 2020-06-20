@@ -12,7 +12,18 @@ export class AppComponent {
 
   productos = {};
 
+  editProd: any = {
+    id_producto:undefined,
+    ci_cliente:undefined,
+    cantidad:undefined
+  }
+
   constructor(private StockService: StockService) { }
+
+  ngOnInit() {
+    this.mostrarTodos();
+    console.log(this.productos);
+  }
 
   mostrarTodos() {
     this.StockService.getStock().subscribe(
@@ -22,11 +33,13 @@ export class AppComponent {
       }
       );
   }
-
-  ngOnInit() {
-    this.mostrarTodos();
-    console.log(this.productos);
+  editarProducto(producto) {
+    this.editProd=producto;
   }
+  productoEditado() {
+    this.StockService.editarProducto(this.editProd);
+  }
+
 
   
 
