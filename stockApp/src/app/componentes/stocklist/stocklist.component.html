@@ -1,0 +1,58 @@
+<h2>Listado de productos</h2>
+<table class="table table-dark">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let stock of stock; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{stock.cliente.nombre}}</td>
+            <td>{{stock.producto.descripcion}}</td>
+            <td>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#editarStock" (click)="editarStock(stock.id, stock.cliente.ci_cliente, stock.producto.id_producto)">Editar</button>
+            </td>
+            <td>
+                <button class="btn btn-danger">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="modal" id="editarStock" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="stockEditado()">
+            <label for="ci_cliente" class="mr-2" style="width:90px;">Producto</label>
+            <select [(ngModel)]="editStock.id_producto" [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let producto of productos_list" [value]="producto['id_producto']">
+                {{producto['descripcion']}}
+              </option>
+            </select>
+            <br>
+            <label for="ci_cliente" class="mr-2" style="width:90px;">Cliente</label>
+            <select [(ngModel)]="editStock.ci_cliente" [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let cliente of clientes_list" [value]="cliente['ci']" >
+                {{cliente.nombre}}
+              </option>
+            </select>
+            <br>
+            <button class="btn btn-success mt-3 mr-2" type="submit" data-dismiss="modal" (click)="stockEditado()">Actualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

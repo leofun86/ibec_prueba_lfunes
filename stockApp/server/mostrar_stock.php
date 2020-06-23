@@ -40,7 +40,7 @@
           while($regs_cli = $result_clientes->fetch_assoc()) { $cliente=$regs_cli; }
 
           $data[]=array(
-            'id'=> $regs['id_producto'],
+            'id'=> $regs['id'],
             "producto" => $producto,
             "cliente" => $cliente,
           );

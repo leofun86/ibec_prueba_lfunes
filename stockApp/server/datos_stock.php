@@ -1,3 +1,4 @@
+<?php
 /*
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
@@ -14,30 +15,32 @@
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 */
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../environments/environment';
-import { Stock } from "./stock";
+if (isset($_GET['op'])) {
+  header("Access-Control-Allow-Origin: http://localhost:4200");
+  require 'conexion.php';
+  //sleep(2);
 
-@Injectable({
-  providedIn: 'root'
-})
-export class StockService {
-  baseUrl = environment.baseUrl
-  
-  constructor(private http: HttpClient) { }
+  $mysqli->set_charset('utf8');
+  $op = $_GET['op'];
 
-  getStock() {
-    return this.http.get(`${this.baseUrl}/mostrar_stock.php`);
+  switch ($op) {
+    case 1:
+      $new_request=$mysqli->prepare("SELECT id_producto, descripcion FROM productos");
+    break;
+    case 2:
+      $new_request=$mysqli->prepare("SELECT ci, nombre FROM clientes");
+    break;
   }
-  editarProducto(stock) {
-    console.log(stock);
-    return this.http.put(`${this.baseUrl}/editar_stock.php`, JSON.stringify(stock));
-  }
-  getProductosList() {
-    return this.http.get(`${this.baseUrl}/datos_stock.php?op=1`);
-  }
-  getClientesList() {
-    return this.http.get(`${this.baseUrl}/datos_stock.php?op=2`);
-  }
+  $new_request->execute();
+  $result = $new_request->get_result();
+
+    if ($result->num_rows > 0) {
+      while($regs = $result->fetch_array()) { 
+        $data[]=$regs;
+      }
+      echo json_encode($data);
+    } else { echo json_encode(array('error' => true)); }
+    $new_request->close();
+  $mysqli->close();
 }
+?>
