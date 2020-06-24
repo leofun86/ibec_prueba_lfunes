@@ -49,6 +49,10 @@ export class ProductoslistComponent implements OnInit {
     this.editProducto.precio=Number(this.editProducto['precio']);
     this.ProductoService.editarProducto(this.editProducto).subscribe(()=>{
       this.mostrarTodos();
+      $('.txt_result').text('Producto editado correctamente');
+      $('.alert').css('background', 'rgba(0, 0, 255, 0.2)');
+      $('.alert').slideDown();
+      setTimeout(()=>{ $('.alert').slideUp(); }, 3000);
     });
     //this.mostrarTodos();
   }
@@ -57,7 +61,11 @@ export class ProductoslistComponent implements OnInit {
     this.addProducto.precio=Number(this.addProducto['precio']);
     this.ProductoService.agregarProducto(this.addProducto).subscribe(()=>{
       this.mostrarTodos();
-      this.addProducto = { id_producto:undefined, descripcion:"", precio:undefined, }
+      this.addProducto = { id_producto:undefined, descripcion:"", precio:undefined, };
+      $('.txt_result').text('Producto agregado correctamente');
+      $('.alert').css('background', 'rgba(0, 255, 0, 0.2)');
+      $('.alert').slideDown();
+      setTimeout(()=>{ $('.alert').slideUp(); }, 3000);
     });
   }
   fadeInAddProducto() {

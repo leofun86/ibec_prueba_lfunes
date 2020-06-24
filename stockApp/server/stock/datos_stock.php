@@ -25,10 +25,10 @@ if (isset($_GET['op'])) {
 
   switch ($op) {
     case 1:
-      $new_request=$mysqli->prepare("SELECT id_producto, descripcion FROM productos");
+      $new_request=$mysqli->prepare("SELECT id_producto, descripcion FROM productos as p WHERE NOT EXISTS (SELECT * FROM stock as s WHERE s.id_producto=p.id_producto)");
     break;
     case 2:
-      $new_request=$mysqli->prepare("SELECT ci, nombre FROM clientes"); 
+      $new_request=$mysqli->prepare("SELECT ci, nombre FROM clientes as c WHERE NOT EXISTS (SELECT * FROM stock as s where s.ci_cliente=c.ci)"); 
     break;
   }
   $new_request->execute();

@@ -51,6 +51,10 @@ export class ClienteslistComponent implements OnInit {
     this.editCliente.ci=Number(this.editCliente['ci']);
     this.ClienteService.editarCliente(this.editCliente).subscribe(()=>{
       this.mostrarTodos();
+      $('.txt_result').text('Cliente editado correctamente');
+      $('.alert').css('background', 'rgba(0, 0, 255, 0.2)');
+      $('.alert').slideDown();
+      setTimeout(()=>{ $('.alert').slideUp(); }, 3000);
     });
     //this.mostrarTodos();
   }
@@ -58,7 +62,11 @@ export class ClienteslistComponent implements OnInit {
     this.addCliente.ci=Number(this.addCliente['ci']);
     this.ClienteService.agregarCliente(this.addCliente).subscribe(()=>{
       this.mostrarTodos();
-      this.addCliente = { ci:undefined, nombre:"", correo:"", celular:"", }
+      this.addCliente = { ci:undefined, nombre:"", correo:"", celular:"", };
+      $('.txt_result').text('Cliente agregado correctamente');
+      $('.alert').css('background', 'rgba(0, 255, 0, 0.2)');
+      $('.alert').slideDown();
+      setTimeout(()=>{ $('.alert').slideUp(); }, 3000);
     });
   }
   fadeInAddCliente() {

@@ -1,5 +1,8 @@
 <h1 class="titulo f_violeta">Stock</h1>
-<button class="btn btn-success my-2 mx-2" data-toggle="modal" data-target="#agregarStock" (click)="fadeInAddStock()">+ Agregar item</button>
+<div class="alert alert-dismissible m-0 text-center" style="display:none;" role="alert">
+  <span class="txt_result"></span>
+</div>
+<button class="btn btn-success btn-lg my-2 mx-2" data-toggle="modal" data-target="#agregarStock" (click)="fadeInAddStock()"><i class="fa fa-plus btn_icono"></i>&nbsp;&nbsp;Agregar item</button>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -18,10 +21,18 @@
             <td>{{stock.producto.descripcion}}</td>
             <td>{{'U$S '+stock.producto.precio}}</td>
             <td>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#editarStock" (click)="editarStock(stock.id,stock.producto.id_producto, stock.cliente.ci_cliente)">Editar</button>
-            </td>
-            <td>
-                <button class="btn btn-danger" (click)="eliminarStock(stock.id)">Eliminar</button>
+                <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#editarStock"
+                (click)="editarStock(
+                  stock.id,
+                  stock.producto.id_producto,
+                  stock.producto.descripcion,
+                  stock.cliente.ci,
+                  stock.cliente.nombre)">
+                  <i class="fa fa-edit btn_icono"></i>
+                </button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#eliminarStock" (click)="preEliminarStock(stock.id)">
+                  <i class="fa fa-trash btn_icono"></i>
+                </button>
             </td>
         </tr>
     </tbody>
@@ -31,29 +42,38 @@
 <div class="modal" id="editarStock" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header f_violeta">
         <h5 class="modal-title">Editar Item</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <h4>Datos Actuales</h4>
+        <ul>
+          <li>Producto: {{datosActuales.nombre_producto}}</li>
+          <li>Cliente: {{datosActuales.nombre_cliente+' - '+datosActuales.ci_cliente}}</li>
+        </ul>
         <form (ngSubmit)="stockEditado()">
-            <label for="ci_cliente" class="mr-2" style="width:90px;">Producto</label>
-            <select [(ngModel)]="editStock.id_producto" [ngModelOptions]="{standalone: true}">
-              <option *ngFor="let producto of productos_list" [value]="producto['id_producto']">
-                {{producto.descripcion}}
-              </option>
-            </select>
-            <br>
-            <label for="ci_cliente" class="mr-2" style="width:90px;">Cliente</label>
-            <select [(ngModel)]="editStock.ci_cliente" [ngModelOptions]="{standalone: true}">
+          <div class="form-group">
+            <label for="ci_cliente" class="col-form-label">Producto</label>
+              <select [(ngModel)]="editStock.id_producto" [ngModelOptions]="{standalone: true}" class="form-control">
+                <option *ngFor="let producto of productos_list" [value]="producto['id_producto']">
+                  {{producto.descripcion}}
+                </option>
+              </select>
+          </div>
+          <div class="form-group">
+            <label for="ci_cliente" class="col-form-label col-2">Cliente</label>
+            <select [(ngModel)]="editStock.ci_cliente" [ngModelOptions]="{standalone: true}" class="form-control">
               <option *ngFor="let cliente of clientes_list" [value]="cliente['ci']" >
                 {{cliente['nombre']}}
               </option>
             </select>
-            <br>
-            <button class="btn btn-success mt-3 mr-2" type="submit" data-dismiss="modal" (click)="stockEditado()">Actualizar</button>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-success w-75 mt-3 mr-2" type="submit" data-dismiss="modal" (click)="stockEditado()">Actualizar</button>
+          </div>
         </form>
       </div>
     </div>
@@ -64,7 +84,7 @@
 <div class="modal" id="agregarStock" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header f_violeta">
         <h5 class="modal-title">Nuevo Item</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -72,23 +92,50 @@
       </div>
       <div class="modal-body">
         <form>
-            <label for="ci_cliente" class="mr-2" style="width:90px;">Producto</label>
-            <select [(ngModel)]="addStock.id_producto" [ngModelOptions]="{standalone: true}">
-              <option selected="true">Elija una opción</option>
+          <div class="form-group">
+            <label for="ci_cliente" class="col-form-label">Producto</label>
+            <select [(ngModel)]="addStock.id_producto" [ngModelOptions]="{standalone: true}" class="form-control">
               <option *ngFor="let producto of productos_list" [value]="producto['id_producto']">
                 {{producto['descripcion']}}
               </option>
             </select>
-            <br>
-            <label for="ci_cliente" class="mr-2" style="width:90px;">Cliente</label>
-            <select [(ngModel)]="addStock.ci_cliente" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="form-group">
+            <label for="ci_cliente" class="col-form-label">Cliente</label>
+            <select [(ngModel)]="addStock.ci_cliente" [ngModelOptions]="{standalone: true}" class="form-control">
               <option *ngFor="let cliente of clientes_list" [value]="cliente['ci']" >
                 {{cliente['nombre']}}
               </option>
             </select>
-            <br>
-            <button class="btn btn-success mt-3 mr-2" type="submit" data-dismiss="modal" (click)="agregarStock()">Agregar</button>
+          </div>
+            <div class="text-center">
+              <button class="btn btn-success w-75 mt-3" type="submit" data-dismiss="modal" (click)="agregarStock()">Agregar</button>
+            </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ELIMINAR ITEM DE STOCK -->
+<div class="modal" id="eliminarStock" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header f_violeta">
+        <h5 class="modal-title">¿Deseas realmente eliminar este item?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <button class="btn btn-danger mr-2" (click)="eliminarStock()" data-dismiss="modal" aria-label="Close">
+            Eliminar
+          </button>
+         <button class="btn btn-info" data-dismiss="modal" aria-label="Close">
+           Cancelar
+          </button>
+        </div>
       </div>
     </div>
   </div>
