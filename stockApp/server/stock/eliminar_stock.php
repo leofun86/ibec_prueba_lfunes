@@ -1,3 +1,4 @@
+<?php
 /*
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
@@ -14,34 +15,14 @@
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 */
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../environments/environment';
+    header("Access-Control-Allow-Origin: http://localhost:4200");
+    header("Access-Control-Allow-Headers: *");
 
-@Injectable({
-  providedIn: 'root'
-})
-export class StockService {
-  urlStock = environment.urlStock
-  
-  constructor(private http: HttpClient) { }
-
-  getStock() {
-    return this.http.get(`${this.urlStock}/mostrar_stock.php`);
-  }
-  agregarStock(new_stock) {
-    return this.http.post(`${this.urlStock}/agregar_stock.php`, JSON.stringify(new_stock));
-  }
-  editarStock(stock) {
-    return this.http.put(`${this.urlStock}/editar_stock.php`, JSON.stringify(stock));
-  }
-  eliminarStock(id) {
-    return this.http.get(`${this.urlStock}/eliminar_stock.php?id=${id}`);
-  }
-  getProductosList() {
-    return this.http.get(`${this.urlStock}/datos_stock.php?op=1`);
-  }
-  getClientesList() {
-    return this.http.get(`${this.urlStock}/datos_stock.php?op=2`);
-  }
-}
+    if (isset($_GET['id'])) {
+        require '../conexion.php';
+        $id=$_GET['id'];
+        $mysqli->query("DELETE FROM stock WHERE id=$id");
+        $mysqli->close();
+    }
+        
+?>

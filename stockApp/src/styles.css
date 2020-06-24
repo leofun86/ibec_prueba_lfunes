@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+/*
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+---- ██╗░░░░░███████╗░█████╗░  ███████╗██╗░░░██╗███╗░░██╗███████╗░██████╗ ---- 
+---- ██║░░░░░██╔════╝██╔══██╗  ██╔════╝██║░░░██║████╗░██║██╔════╝██╔════╝ ---- 
+---- ██║░░░░░█████╗░░██║░░██║  █████╗░░██║░░░██║██╔██╗██║█████╗░░╚█████╗░ ---- 
+---- ██║░░░░░██╔══╝░░██║░░██║  ██╔══╝░░██║░░░██║██║╚████║██╔══╝░░░╚═══██╗ ---- 
+---- ███████╗███████╗╚█████╔╝  ██║░░░░░╚██████╔╝██║░╚███║███████╗██████╔╝ ---- 
+---- ╚══════╝╚══════╝░╚════╝░  ╚═╝░░░░░░╚═════╝░╚═╝░░╚══╝╚══════╝╚═════╝░ ---- 
+
+---- Prueba Fullstack para IBEC Internacional --------------------------------
+---- leorecord@hotmail.com ---------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+*/
+/* TITULOS DE PÁGINAS */
+.titulo { padding:10px;margin:0px; font-size:4rem; }
+
+/*COLORES*/
+.celeste { color:#73b5ba!important; } .f_celeste { background:#73b5ba!important; color:white!important; }
+.verde { color:#bdd14f!important; } .f_verde { background:#bdd14f!important; color:#005a90!important; }
+.violeta { color:#7863a8; } .f_violeta { background:#7863a8; color:white!important; }
+
+
+/* NAVBAR */
+#stock_link, #clientes_link, #productos_link { padding-left:10px!important; }
+#stock_link:hover{ background:#7863a8; }
+#clientes_link:hover{ background:#73b5ba; }
+#productos_link:hover{ background:#bdd14f; } #productos_link:hover > a { color:#005a90!important; }

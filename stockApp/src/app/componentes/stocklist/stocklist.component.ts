@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StockService } from "../../stock.service"
-import { Stock } from "../../stock";
+import { StockService } from "../../stock.service";
+import $ from 'jquery';
 
 @Component({
   selector: 'app-stocklist',
@@ -9,21 +9,22 @@ import { Stock } from "../../stock";
 })
 export class StocklistComponent implements OnInit {
 
-  //public editStock: Stock = new Stock(0, 0, 0);
-
   stock = {};
 
-  
   editStock = {
     id:undefined,
     id_producto:undefined,
     ci_cliente:undefined
   };
   
-
   clientes_list = {};
-
   productos_list = {};
+
+  addStock = {
+    id_producto:undefined,
+    ci_cliente:undefined,
+  }
+
 
   constructor(private StockService: StockService) { }
 
@@ -33,10 +34,10 @@ export class StocklistComponent implements OnInit {
   }
   mostrarDatos() {
     this.StockService.getProductosList().subscribe(
-      result => { this.productos_list = result; console.log("Productos"); console.log(this.productos_list); }
+      result => { this.productos_list = result; console.log("Productos"); }
     );
     this.StockService.getClientesList().subscribe(
-      result => { this.clientes_list = result; console.log("Clientes"); console.log(this.clientes_list); }
+      result => { this.clientes_list = result; console.log("Clientes"); }
     );
   }
   mostrarTodos() {
@@ -51,15 +52,30 @@ export class StocklistComponent implements OnInit {
     this.editStock.id=id;
     this.editStock.id_producto=id_producto;
     this.editStock.ci_cliente=ci_cliente;
+    $('#editarStock').fadeIn();
   }
   stockEditado() {
     //console.log(this.editStock)
     this.editStock.id_producto=Number(this.editStock['id_producto']);
     this.editStock.ci_cliente=Number(this.editStock['ci_cliente']);
-    this.StockService.editarProducto(this.editStock).subscribe(()=>{
+    this.StockService.editarStock(this.editStock).subscribe(()=>{
       this.mostrarTodos();
     });
     //this.mostrarTodos();
   }
-  
+  agregarStock(){
+    this.addStock.id_producto=Number(this.addStock['id_producto']);
+    this.addStock.ci_cliente=Number(this.addStock['ci_cliente']);
+    this.StockService.agregarStock(this.addStock).subscribe(()=>{
+      this.mostrarTodos();
+    });
+  }
+  fadeInAddStock() {
+    $('#agregarStock').fadeIn();
+  }
+  eliminarStock(id) {
+    this.StockService.eliminarStock(id).subscribe(result=>{
+      this.mostrarTodos();
+    });
+  }
 }

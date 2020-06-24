@@ -15,32 +15,13 @@
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 */
-if (isset($_GET['op'])) {
-  header("Access-Control-Allow-Origin: http://localhost:4200");
-  require 'conexion.php';
-  //sleep(2);
+    header("Access-Control-Allow-Origin: http://localhost:4200");
+    header("Access-Control-Allow-Headers: *");
+    require '../conexion.php';
 
-  $mysqli->set_charset('utf8');
-  $op = $_GET['op'];
+    $json_cliente = json_decode(file_get_contents("php://input"));
+        
+    $mysqli->query("INSERT INTO clientes (ci, nombre, correo, celular) values ($json_cliente->ci, '$json_cliente->nombre', '$json_cliente->correo', '$json_cliente->celular' )");
 
-  switch ($op) {
-    case 1:
-      $new_request=$mysqli->prepare("SELECT id_producto, descripcion FROM productos");
-    break;
-    case 2:
-      $new_request=$mysqli->prepare("SELECT ci, nombre FROM clientes");
-    break;
-  }
-  $new_request->execute();
-  $result = $new_request->get_result();
-
-    if ($result->num_rows > 0) {
-      while($regs = $result->fetch_array()) { 
-        $data[]=$regs;
-      }
-      echo json_encode($data);
-    } else { echo json_encode(array('error' => true)); }
-    $new_request->close();
-  $mysqli->close();
-}
+    $mysqli->close();
 ?>

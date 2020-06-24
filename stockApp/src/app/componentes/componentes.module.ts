@@ -1,16 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StocklistComponent } from './stocklist/stocklist.component';
 import { FormsModule } from '@angular/forms';
-
+import { RouterModule, Router } from '@angular/router';
+import { StocklistComponent } from './stocklist/stocklist.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ClienteslistComponent } from './clienteslist/clienteslist.component';
+import { ProductoslistComponent } from './productoslist/productoslist.component';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [StocklistComponent],
+  declarations: [StocklistComponent, NavbarComponent, ClienteslistComponent, ProductoslistComponent],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule,
   ],
-  exports: [StocklistComponent]
+  exports: [
+    StocklistComponent,
+    NavbarComponent,
+    ClienteslistComponent,
+    ProductoslistComponent
+  ]
 })
 export class ComponentesModule { }

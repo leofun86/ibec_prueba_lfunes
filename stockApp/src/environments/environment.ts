@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl: "http://localhost:80/ibec_prueba_lfunes/stockApp/server",
+  urlStock: "http://localhost:80/ibec_prueba_lfunes/stockApp/server/stock",
+  clienteUrl: "http://localhost:80/ibec_prueba_lfunes/stockApp/server/cliente",
+  productoUrl: "http://localhost:80/ibec_prueba_lfunes/stockApp/server/producto",
 };
 
 /*

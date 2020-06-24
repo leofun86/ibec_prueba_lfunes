@@ -21,27 +21,19 @@ import { environment } from '../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class StockService {
-  urlStock = environment.urlStock
+export class ClienteService {
+  urlCliente = environment.clienteUrl;
   
   constructor(private http: HttpClient) { }
 
-  getStock() {
-    return this.http.get(`${this.urlStock}/mostrar_stock.php`);
+  getClientes() {
+    return this.http.get(`${this.urlCliente}/mostrar_cliente.php`);
   }
-  agregarStock(new_stock) {
-    return this.http.post(`${this.urlStock}/agregar_stock.php`, JSON.stringify(new_stock));
+  agregarCliente(new_cliente) {
+    return this.http.post(`${this.urlCliente}/agregar_cliente.php`, JSON.stringify(new_cliente));
   }
-  editarStock(stock) {
-    return this.http.put(`${this.urlStock}/editar_stock.php`, JSON.stringify(stock));
-  }
-  eliminarStock(id) {
-    return this.http.get(`${this.urlStock}/eliminar_stock.php?id=${id}`);
-  }
-  getProductosList() {
-    return this.http.get(`${this.urlStock}/datos_stock.php?op=1`);
-  }
-  getClientesList() {
-    return this.http.get(`${this.urlStock}/datos_stock.php?op=2`);
+  editarCliente(cliente) {
+    console.log(cliente);
+    return this.http.put(`${this.urlCliente}/editar_cliente.php`, JSON.stringify(cliente));
   }
 }

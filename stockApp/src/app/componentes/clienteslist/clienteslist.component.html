@@ -1,0 +1,84 @@
+<h1 class="titulo f_celeste">Clientes</h1>
+<button class="btn btn-success my-2 mx-2" data-toggle="modal" data-target="#agregarCliente" (click)="fadeInAddCliente()">+ Agregar cliente</button>
+<table class="table table-striped">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cédula</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Celular</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cliente of clientes; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{cliente.nombre}}</td>
+            <td>{{cliente.ci}}</td>
+            <td>{{cliente.correo}}</td>
+            <td>{{cliente.celular}}</td>
+            <td>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#editarCliente" (click)="editarCliente(cliente.ci, cliente.nombre, cliente.correo, cliente.celular )">Editar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- EDITAR CLIENTE -->
+<div class="modal" id="editarCliente" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Cliente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="clienteEditado()">
+            <label for="nombre" class="mr-2" style="width:90px;">Nombre</label>
+            <input type="text" name="nombre" [(ngModel)]="editCliente.nombre" [ngModelOptions]="{standalone: true}">
+            <br>
+            <label for="correo" class="mr-2" style="width:90px;">Correo</label>
+            <input type="text" name="correo" [(ngModel)]="editCliente.correo" [ngModelOptions]="{standalone: true}">
+            <br>
+            <label for="celular" class="mr-2" style="width:90px;">Celular</label>
+            <input type="text" name="celular" [(ngModel)]="editCliente.celular" [ngModelOptions]="{standalone: true}">
+            <br>
+            <button class="btn btn-success mt-3 mr-2" type="submit" data-dismiss="modal" (click)="clienteEditado()">Actualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AGREGAR CLIENTE -->
+<div class="modal" id="agregarCliente" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nuevo Cliente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <label for="nombre" class="mr-2" style="width:90px;">Nombre</label>
+            <input type="text" name="nombre" [(ngModel)]="addCliente.nombre" [ngModelOptions]="{standalone: true}" placeholder="Escriba un nombre">
+            <br>
+            <label for="ci" class="mr-2" style="width:90px;">CI</label>
+            <input type="text" name="ci" [(ngModel)]="addCliente.ci" [ngModelOptions]="{standalone: true}" placeholder="Escriba una cédula">
+            <br>
+            <label for="correo" class="mr-2" style="width:90px;">Correo</label>
+            <input type="text" name="correo" [(ngModel)]="addCliente.correo" [ngModelOptions]="{standalone: true}" placeholder="Escriba un correo">
+            <br>
+            <label for="celular" class="mr-2" style="width:90px;">Celular</label>
+            <input type="text" name="celular" [(ngModel)]="addCliente.celular" [ngModelOptions]="{standalone: true}" placeholder="Escriba un celular">
+            <br>
+            <button class="btn btn-success mt-3 mr-2" type="submit" data-dismiss="modal" (click)="agregarCliente()">Agregar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
