@@ -1,24 +1,141 @@
-<nav class="navbar navbar-dark  indigo darken-2" style="background:#005a90;">
-  
-    <button class="navbar-toggler third-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent22"
-      aria-controls="navbarSupportedContent22" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon3"><span></span><span></span><span></span></div>
-    </button>
-    <a class="navbar-brand" href="#">StockApp</a>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent22">
-  
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" id="stock_link">
-          <a class="nav-link active" href="#" routerLink="stocklist" routerLinkActive="active">StockList</a>
-        </li>
-        <li class="nav-item" id="clientes_link">
-          <a class="nav-link" href="#" routerLink="clientes" routerLinkActive="active">Clientes</a>
-        </li>
-        <li class="nav-item" id="productos_link">
-          <a class="nav-link" href="#" routerLink="productos" routerLinkActive="active">Productos</a>
-        </li>
-      </ul>
-
+<!-- ADVERTENCIA -->
+<div id="advertencia" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content no_border gris_oscuro">
+      <div class="modal-body text-center">
+        <h3 class="text-center text-white">¡Advertencia!</h3>
+        <p class="text-white">Para poder ver el objeto requerido con la id y los objetos <b>Cliente</b> y <b>Producto</b>, abrir la consola del navegador para poder verlo.</p>
+        <button class="btn btn-success mb-3" (click)="fadeOutAdvertencia()">¡Entendido!</button>
+        <img src="assets/advertencia_object.jpg" class="img-fluid" alt="">
+      </div>
     </div>
-  </nav>
+  </div>
+</div>
+<nav class="navbar navbar-dark  indigo darken-2" style="background:#005a90;">
+  <button class="navbar-toggler third-button" style="border:none;outline:none;margin-bottom:10px;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent22"
+    aria-controls="navbarSupportedContent22" aria-expanded="false" aria-label="Toggle navigation">
+    <div class="animated-icon3"><span></span><span></span><span></span></div>
+  </button> 
+  <a class="navbar-brand" href="#">stockApp</a>  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent22" style="border-top:2px solid #4c8fb6;">
+    <h3 class="mt-2 text-white">Tutoriales</h3>
+    <button class="btn f_violeta mr-2" data-toggle="modal" data-target="#item_insert" (click)="youtube(1);">
+      Agregar item
+    </button>
+    <button class="btn f_violeta mr-2" data-toggle="modal" data-target="#item_update" (click)="youtube(2);">
+      Editar item
+    </button>
+    <button class="btn f_violeta mr-2" data-toggle="modal" data-target="#item_delete" (click)="youtube(3);">
+      Eliminar item
+    </button>
+    <button class="btn f_celeste mr-2" data-toggle="modal" data-target="#cliente_insert" (click)="youtube(4);">
+      Agregar cliente
+    </button>
+    <button class="btn f_celeste mr-2" data-toggle="modal" data-target="#cliente_update" (click)="youtube(5);">
+      Editar cliente
+    </button>
+    <button class="btn f_verde mr-2" data-toggle="modal" data-target="#producto_insert" (click)="youtube(6);">
+      Agregar producto
+    </button>
+    <button class="btn f_verde mr-2" data-toggle="modal" data-target="#producto_update" (click)="youtube(7);">
+      Editar producto
+    </button>
+    <h3 class="mt-2 text-white">Menu</h3>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" id="stock_link">
+        <a class="nav-link active pl-2" href="#" routerLink="stocklist" routerLinkActive="active">StockList</a>
+      </li>
+      <li class="nav-item" id="clientes_link">
+        <a class="nav-link pl-2" href="#" routerLink="clientes" routerLinkActive="active">Clientes</a>
+      </li>
+      <li class="nav-item" id="productos_link">
+        <a class="nav-link pl-2" href="#" routerLink="productos" routerLinkActive="active">Productos</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- INSERTAR ITEM -->
+<div class="modal youtube" id="item_insert" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content no_border gris_oscuro">
+      <div class="modal-body text-center">
+        <div class="container">
+          <iframe class="video" width="auto" height="auto" src="https://www.youtube.com/embed/APYEPvYU-cI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- EDITAR ITEM -->
+<div class="modal youtube" id="item_update" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content no_border gris_oscuro">
+      <div class="modal-body text-center">
+        <div class="container">
+          <iframe class="video" width="auto" height="auto" src="https://www.youtube.com/embed/MWgoOBN6BfM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ELIMINAR ITEM -->
+<div class="modal youtube" id="item_delete" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content no_border gris_oscuro">
+      <div class="modal-body text-center">
+        <div class="container">
+          <iframe class="video" width="auto" height="auto" src="https://www.youtube.com/embed/U4RlT7tA7IM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- INSERTAR CLIENTE -->
+<div class="modal youtube" id="cliente_insert" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content no_border gris_oscuro">
+      <div class="modal-body text-center">
+        <div class="container">
+          <iframe class="video" width="auto" height="auto" src="https://www.youtube.com/embed/Be7ggjnwjd0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- EDITAR CLIENTE -->
+<div class="modal youtube" id="cliente_update" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content no_border gris_oscuro">
+      <div class="modal-body text-center">
+        <div class="container">
+          <iframe class="video" width="auto" height="auto" src="https://www.youtube.com/embed/Gtir7xDBZAw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- INSERTAR PRODUCTO -->
+<div class="modal youtube" id="producto_insert" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content no_border gris_oscuro">
+      <div class="modal-body text-center">
+        <div class="container">
+          <iframe class="video" width="auto" height="auto" src="https://www.youtube.com/embed/jH9YstsrvyQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- EDITAR PRODUCTO -->
+<div class="modal" id="producto_update" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content no_border gris_oscuro">
+      <div class="modal-body text-center">
+        <div class="container">
+          <iframe class="video" width="auto" height="auto" src="https://www.youtube.com/embed/XteoMHW8LxY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

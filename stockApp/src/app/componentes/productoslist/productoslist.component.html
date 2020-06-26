@@ -1,85 +1,87 @@
-<h1 class="titulo f_verde">Productos</h1>
-<div class="alert alert-dismissible m-0 text-center" style="display:none;" role="alert">
-  <span class="txt_result"></span>
-</div>
-<button class="btn btn-success btn-lg my-2 mx-2" data-toggle="modal" data-target="#agregarProducto" (click)="fadeInAddProducto()"><i class="fa fa-plus btn_icono"></i>&nbsp;&nbsp;Agregar Producto</button>
-<table class="table table-striped">
-    <thead>
-        <tr>
-        <th scope="col">#</th>
-        <th scope="col">Id producto</th>
-        <th scope="col">Descripcion</th>
-        <th scope="col">Precio</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let producto of productos; index as i">
-            <th scope="row">{{i+1}}</th>
-            <td>{{producto.id_producto}}</td>
-            <td>{{producto.descripcion}}</td>
-            <td>{{'U$S '+producto.precio}}</td>
-            <td>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#editarProducto" (click)="editarProducto(producto.id_producto, producto.descripcion, producto.precio )">
-                  <i class="fa fa-edit btn_icono"></i>
-                </button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="container_page">
+  <h1 class="titulo f_verde">Productos</h1>
+  <div class="alert alert-dismissible m-0 text-center" style="display:none;" role="alert">
+    <span class="txt_result"></span>
+  </div>
+  <button class="btn btn-success btn-lg my-2 mx-2" data-toggle="modal" data-target="#agregarProducto" (click)="fadeInAddProducto()"><i class="fa fa-plus btn_icono"></i>&nbsp;&nbsp;Agregar Producto</button>
+  <table class="table table-striped">
+      <thead>
+          <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id producto</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Precio</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let producto of productos; index as i">
+              <th scope="row">{{i+1}}</th>
+              <td>{{producto.id_producto}}</td>
+              <td>{{producto.descripcion}}</td>
+              <td>{{'U$S '+producto.precio}}</td>
+              <td>
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#editarProducto" (click)="editarProducto(producto.id_producto, producto.descripcion, producto.precio )">
+                    <i class="fa fa-edit btn_icono"></i>
+                  </button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
 
-<!-- EDITAR PRODUCTO -->
-<div class="modal" id="editarProducto" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header f_verde">
-        <h5 class="modal-title">Editar Producto</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form (ngSubmit)="productoEditado()">
-          <div class="form-group">
-            <label for="descripcion" class="col-form-label">Descripción</label>
-            <input type="text" name="nombre" [(ngModel)]="editProducto.descripcion" [ngModelOptions]="{standalone: true}" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="precio" class="col-form-label">Precio</label>
-            <input type="text" name="correo" [(ngModel)]="editProducto.precio" [ngModelOptions]="{standalone: true}" class="form-control">
-          </div>
-          <div class="text-center">
-            <button class="btn btn-success w-75 mt-3" type="submit" data-dismiss="modal" (click)="productoEditado()">Actualizar</button>
-          </div>
-        </form>
+  <!-- EDITAR PRODUCTO -->
+  <div class="modal" id="editarProducto" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header f_verde">
+          <h5 class="modal-title">Editar Producto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="productoEditado()">
+            <div class="form-group">
+              <label for="descripcion" class="col-form-label">Descripción</label>
+              <input type="text" name="nombre" [(ngModel)]="editProducto.descripcion" [ngModelOptions]="{standalone: true}" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="precio" class="col-form-label">Precio</label>
+              <input type="text" name="correo" [(ngModel)]="editProducto.precio" [ngModelOptions]="{standalone: true}" class="form-control">
+            </div>
+            <div class="text-center">
+              <button class="btn btn-success w-75 mt-3" type="submit" data-dismiss="modal" (click)="productoEditado()">Actualizar</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- AGREGAR PRODUCTO -->
-<div class="modal" id="agregarProducto" tabindex="-1" role="dialog">
-  <div class="modal-dialog p2" role="document">
-    <div class="modal-content">
-      <div class="modal-header f_verde">
-        <h5 class="modal-title">Nuevo Producto</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="descripción" class="col-form-label">Descripción</label>
-            <input type="text" name="descripcion" [(ngModel)]="addProducto.descripcion" [ngModelOptions]="{standalone: true}" placeholder="Escriba una descripción" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="ci" class="col-form-label">Precio</label>
-            <input type="text" name="ci" [(ngModel)]="addProducto.precio" [ngModelOptions]="{standalone: true}" placeholder="Escriba un precio" class="form-control" required>
-          </div>
-          <div class="text-center">
-            <button class="btn btn-success w-75 mt-3" type="submit" data-dismiss="modal" (click)="agregarProducto()">Agregar</button>
-          </div>
-        </form>
+  <!-- AGREGAR PRODUCTO -->
+  <div class="modal" id="agregarProducto" tabindex="-1" role="dialog">
+    <div class="modal-dialog p2" role="document">
+      <div class="modal-content">
+        <div class="modal-header f_verde">
+          <h5 class="modal-title">Nuevo Producto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="descripción" class="col-form-label">Descripción</label>
+              <input type="text" name="descripcion" [(ngModel)]="addProducto.descripcion" [ngModelOptions]="{standalone: true}" placeholder="Escriba una descripción" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="ci" class="col-form-label">Precio</label>
+              <input type="text" name="ci" [(ngModel)]="addProducto.precio" [ngModelOptions]="{standalone: true}" placeholder="Escriba un precio" class="form-control" required>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-success w-75 mt-3" type="submit" data-dismiss="modal" (click)="agregarProducto()">Agregar</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

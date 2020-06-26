@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   urlStock: "http://localhost:80/ibec_prueba_lfunes/stockApp/server/stock",
   clienteUrl: "http://localhost:80/ibec_prueba_lfunes/stockApp/server/cliente",
   productoUrl: "http://localhost:80/ibec_prueba_lfunes/stockApp/server/producto",

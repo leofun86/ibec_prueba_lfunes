@@ -9,7 +9,7 @@ import $ from 'jquery';
 })
 export class ProductoslistComponent implements OnInit {
 
-  productos = {};
+  productos:any;
 
   editProducto = {
     id_producto:undefined,

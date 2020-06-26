@@ -9,7 +9,7 @@ import $ from 'jquery';
 })
 export class StocklistComponent implements OnInit {
 
-  stock = {};
+  stock:any;
 
   id_stock = undefined;
 
@@ -27,8 +27,8 @@ export class StocklistComponent implements OnInit {
     nombre_cliente:"",
   }
   
-  clientes_list = {};
-  productos_list = {};
+  clientes_list:any;
+  productos_list:any;
 
   addStock = {
     id_producto:undefined,
@@ -43,17 +43,17 @@ export class StocklistComponent implements OnInit {
   }
   mostrarDatos() {
     this.StockService.getProductosList().subscribe(
-      result => { this.productos_list = result; console.log("Productos"); }
+      result => { this.productos_list = result; }
     );
     this.StockService.getClientesList().subscribe(
-      result => { this.clientes_list = result; console.log("Clientes"); }
+      result => { this.clientes_list = result; }
     );
   }
   mostrarTodos() {
     this.StockService.getStock().subscribe(
       result => {
         this.stock = result;
-        //console.log(this.stock);
+        console.log(this.stock);
       }
       );
   }

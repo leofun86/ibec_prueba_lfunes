@@ -16,5 +16,6 @@
 ------------------------------------------------------------------------------
 */
     $mysqli = new mysqli('localhost', 'root', '', 'prueba_ibec');
+    //$mysqli = new mysqli('fdb22.awardspace.net', '3486357_ibecdb', 'kullKDRJ1lv)E!3I', '3486357_ibecdb');
     if ($mysqli->connect_errno) { echo 'Ha habido un error =>'.$mysqli->connect_error; }
 ?>
