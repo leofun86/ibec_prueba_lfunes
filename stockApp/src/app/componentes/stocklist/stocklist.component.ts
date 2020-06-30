@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StockService } from "../../stock.service";
+import { VarieteService } from "../../variete.service";
 import $ from 'jquery';
 
 @Component({
@@ -9,9 +10,18 @@ import $ from 'jquery';
 })
 export class StocklistComponent implements OnInit {
 
+  constructor(private StockService: StockService, private VarieteService: VarieteService) { }
+
+  ngOnInit() {
+    this.mostrarTodos();
+    this.mostrarDatos();
+  }
+
   stock:any;
 
   id_stock = undefined;
+
+  cargando:boolean = this.VarieteService.cargando;
 
   editStock = {
     id:undefined,
@@ -35,12 +45,6 @@ export class StocklistComponent implements OnInit {
     ci_cliente:undefined,
   }
 
-  constructor(private StockService: StockService) { }
-
-  ngOnInit() {
-    this.mostrarTodos();
-    this.mostrarDatos();
-  }
   mostrarDatos() {
     this.StockService.getProductosList().subscribe(
       result => { this.productos_list = result; }
@@ -50,9 +54,12 @@ export class StocklistComponent implements OnInit {
     );
   }
   mostrarTodos() {
+    this.cargando=true;
     this.StockService.getStock().subscribe(
       result => {
         this.stock = result;
+        this.cargando=false;
+        this.VarieteService.cargando=false;
         console.log(this.stock);
       }
       );

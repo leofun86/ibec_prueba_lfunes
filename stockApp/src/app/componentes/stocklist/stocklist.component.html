@@ -3,8 +3,12 @@
   <div class="alert alert-dismissible m-0 text-center" style="display:none;" role="alert">
     <span class="txt_result"></span>
   </div>
-  <button class="btn btn-success btn-lg my-2 mx-2" data-toggle="modal" data-target="#agregarStock" (click)="fadeInAddStock()"><i class="fa fa-plus btn_icono"></i>&nbsp;&nbsp;Agregar item</button>
-  <table class="table table-striped">
+  <div class="text-center" *ngIf="cargando else cargado">
+    <img src="assets/cargando_gif.gif" class="img-fluid mt-5 loading_gif" alt="">
+  </div>
+  <ng-template #cargado>
+    <button class="btn btn-success btn-lg my-2 mx-2" data-toggle="modal" data-target="#agregarStock" (click)="fadeInAddStock()"><i class="fa fa-plus btn_icono"></i>&nbsp;&nbsp;Agregar item</button>
+    <table class="table table-striped">
       <thead>
           <tr>
           <th scope="col">#</th>
@@ -37,7 +41,8 @@
               </td>
           </tr>
       </tbody>
-  </table>
+    </table>
+  </ng-template>
 
   <!-- EDITAR ITEM DE STOCK -->
   <div class="modal" id="editarStock" tabindex="-1" role="dialog">

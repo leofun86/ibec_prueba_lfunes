@@ -16,6 +16,7 @@
 */
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from "../../cliente.service";
+import { VarieteService } from 'src/app/variete.service';
 import $ from 'jquery';
 
 @Component({
@@ -25,7 +26,16 @@ import $ from 'jquery';
 })
 export class ClienteslistComponent implements OnInit {
 
+  constructor(private ClienteService: ClienteService, private VarieteService: VarieteService) { }
+
+  ngOnInit(): void {
+    this.mostrarTodos();
+    this.evalForm();
+  }
+
   clientes:any;
+
+  cargando:boolean = this.VarieteService.cargando;
 
   editCliente = {
     ci:undefined,
@@ -44,17 +54,13 @@ export class ClienteslistComponent implements OnInit {
   correo_exist:number;
   cedula_exist:number;
 
-  constructor(private ClienteService: ClienteService) { }
-
-  ngOnInit(): void {
-    this.mostrarTodos();
-    this.evalForm();
-  }
-
   mostrarTodos() {
+    this.cargando=true;
     this.ClienteService.getClientes().subscribe(
       result => {
         this.clientes = result;
+        this.cargando=false;
+        this.VarieteService.cargando=false;
         //console.log(this.stock);
       }
       );

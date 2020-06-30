@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from "../../producto.service";
+import { VarieteService } from 'src/app/variete.service';
 import $ from 'jquery';
 
 @Component({
@@ -9,7 +10,15 @@ import $ from 'jquery';
 })
 export class ProductoslistComponent implements OnInit {
 
+  constructor(private ProductoService: ProductoService, private VarieteService: VarieteService) { }
+
+  ngOnInit(): void {
+    this.mostrarTodos();
+  }
+
   productos:any;
+
+  cargando:boolean = this.VarieteService.cargando;
 
   editProducto = {
     id_producto:undefined,
@@ -23,17 +32,13 @@ export class ProductoslistComponent implements OnInit {
     precio:undefined,
   }
 
-  constructor(private ProductoService: ProductoService) { }
-
-  ngOnInit(): void {
-    this.mostrarTodos();
-  }
-
   mostrarTodos() {
+    this.cargando=true;
     this.ProductoService.getProductos().subscribe(
       result => {
         this.productos = result;
-        //console.log(this.stock);
+        this.cargando=false;
+        this.VarieteService.cargando = false;
       }
       );
   }

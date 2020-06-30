@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "stockApp"
+    }
+  },
+  "defaultProject": "stockApp",
+  "cli": {
+    "analytics": false
+  }
 }

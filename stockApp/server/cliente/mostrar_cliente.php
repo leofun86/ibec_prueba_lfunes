@@ -17,7 +17,7 @@
 */
     header("Access-Control-Allow-Origin: http://localhost:4200");
     require '../conexion.php';
-    //sleep(2);
+    sleep(1.5);
 
     $mysqli->set_charset('utf8');
 
